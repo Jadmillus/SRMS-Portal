@@ -13,7 +13,7 @@ Frontend: Bootstrap for styling, JavaScript for enhanced user interactions.
 Database: MySQL for storing inventory and supply request information.
 
 ## Installation
-Clone the repository: git clone https://github.com/yourusername/requisition-supply-management.git
+Clone the repository: git clone https://github.com/Jadmillus/SRMS-Portal.git
 Navigate to the project directory.
 Install dependencies: pip install -r requirements.txt
 Set up the MySQL database and update the database configuration in config.py.

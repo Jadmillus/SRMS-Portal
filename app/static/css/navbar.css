@@ -1,0 +1,35 @@
+@media screen and (max-width: 600px) {
+  #sis {
+    display: none;
+  }
+  #responsivelogo {
+    display: none;
+  }
+  
+
+}
+@media screen and (min-width: 600px) {
+    .sis-desktop {
+        display: none;
+        font-weight: bold;
+      }    
+}
+
+.bg{
+  background-color: #cf1b1b;
+  color: white;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.bgcolor{
+    background-color: #9d0b0b;
+    color: white;
+}
+
+
+
+

@@ -1,0 +1,248 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!-- JavaScript and jQuery link -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <!-- font awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="shortcut icon" type="image/vnd.Microsoft.icon" 
+        href="{{ url_for('static', filename = 'images/logohead2.png') }}">
+
+        <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <!--  Javascript for search -->
+    <script src="{{ url_for('static', filename = 'js/search.js') }}"></script>
+
+    <!-- Custom CSS -->
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/request.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = '/css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = '/css/home.css') }}">
+
+</head>
+<style>
+h4{
+    font-family: 'Ubuntu', sans-serif;
+    
+}
+nav{
+    background-color: #e8f1f5;
+}
+
+</style>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">
+                <img id = "responsivelogo" src="{{ url_for('static', filename = 'images/1677595538099.jpg') }}" alt="LOGO">
+                <img class = "sis-desktop" src="{{ url_for('static', filename = 'images/logohead2.png') }}" alt="LOGO">
+
+            </a>
+            <a class="navbar-brand" href="/">
+                <!-- <h5 id="sis">Requisition And Supply Management System</h5> -->
+               
+                <p class="sis-desktop">MKSU</p>
+            </a>
+
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <img src="{{ url_for('static', filename = 'images/profile/' + current_user.picture) }}" class="rounded-circle z-depth-0"
+                                  alt="avatar image" height="35">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('user.home') }}">
+                            <h5 class="sis-desktop">Requisition And Supply Management System</h5>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>  
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('user.home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <li class="nav-item avatar dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Make Request
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url_for('category.categories') }}">Categories</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url_for('request.user_home') }}">See All Items</a>                               
+                                </div>
+                            </li>
+                        </li>
+                        <li class="nav-item">
+                            <li class="nav-item avatar dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Request Log
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url_for('user.user_summary') }}">Request Summary</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url_for('request.user_special_summary') }}">Special Request Summary</a>                               
+                                </div>
+                            </li>
+                        </li>    
+                        {% if current_user.isSuperUser %}
+                            <li class="nav-item">
+                                <li class="nav-item avatar dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Special Requests
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ url_for('request.admin_special_request') }}">View Requests</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ url_for('request.admin_special_summary') }}">View Summary</a>                               
+                                    </div>
+                                </li>
+                            </li>   
+                        {% endif %} 
+ 
+                        {% if current_user.isAdmin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('request.admin_request') }}">Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <li class="nav-item avatar dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Stocks
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ url_for('category.admin_categories') }}">Categories</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ url_for('stock.stocks') }}">See All Stocks</a>                               
+                                    </div>
+                                </li>
+                            </li>                   
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('request.admin_summary') }}">Admin Summary</a>
+                            </li>  
+
+                        {% endif %} 
+                        <div class="sis-desktop">
+                            <li class="nav-item">
+                                <a href="{{ url_for('user.account') }}" class="nav-link" >Profile</a> 
+                            </li> 
+                            <li class="nav-item">
+                                <a href = "javascript:{document.getElementById('logout').submit()}" class="nav-link" >Signout</a> 
+                            </li> 
+                        </div>
+                            
+                        <li class="nav-item avatar dropdown mr-5 pr-5" id = "sis">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   
+                                <img src="{{ url_for('static', filename = 'images/profile/' + current_user.picture) }}" class="rounded-circle z-depth-0"
+                                  alt="avatar image" height="35">
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('user.account') }}">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a href = "javascript:{document.getElementById('logout').submit()}" class="dropdown-item" href="#">
+                                    Signout</a>                               
+                              </div>
+                        </li>
+                       
+                            <form action="{{ url_for('user.logout') }}" id = "logout" method="POST" class="form-inline my-2 my-lg-0">
+                                <input type="hidden">
+                            </form>
+                                           
+                </ul>
+            </div>
+            </div>
+        </nav>
+        <main role="main" class="container">
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="p-2 m-5">
+                            {% for category, message in messages %}
+                                <div class='alert alert-{{category}} alert-dismissible text-center'>
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+            {% endwith %}
+            
+            
+        </main>
+    </header>
+    {% block content %}
+    {% endblock %}
+
+    
+    
+    
+    <footer class="container">
+        <hr>
+        <div class="row">
+            <div class="col-12 col-md-3 pl-lg-=2 text-center">
+                <img class="mb-2" src="{{ url_for('static', filename = 'images/logohead2.png') }}" alt="" width="100" height="100">
+                <small class="d-block mb-3 text-muted">&copy; 2023</small>
+              </div>
+          
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="{{ url_for('user.home') }}">Home</a></li>
+              <li><a class="text-muted" href="{{ url_for('category.categories') }}">Make requests</a></li>
+              
+              <li><a class="text-muted" href="{{ url_for('user.user_summary') }}">Requests Log</a></li>
+              {% if current_user.isAdmin %}
+                <li><a class="text-muted" href="{{ url_for('request.admin_request') }}">Requests</a></li>
+                <li><a class="text-muted" href="{{ url_for('category.admin_categories') }}">Stocks</a></li>
+                <li><a class="text-muted" href="{{ url_for('request.admin_summary') }}">Summary</a></li>
+              {% endif %}
+              <li><a class="text-muted" href="{{ url_for('user.account') }}">Profile</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5>Team</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="https://www.linkedin.com/in/jadmillus-orangi-16a761250" target="_blank">Jadmillus Orangi</a></li>
+               
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <h5>Terms and Conditions</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Locations</a></li>
+              <li><a class="text-muted" href="#">Privacy</a></li>
+              <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        
+      </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <script src="{{ url_for('static', filename = 'js/user.js') }}"></script>
+    <script src = "{{ url_for('static', filename = 'js/search.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/stocks.js') }}"></script>
+</body>

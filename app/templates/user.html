@@ -1,0 +1,60 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="container-fluid justify-content-center row head">
+    <div class="mainhead col-md-12 row" style="justify-content: center;">
+        <div class="col-md-6">
+            <h3 style="text-size-adjust: 4rem;">Stationery Inventory</h3>
+        </div>
+
+        <div class="col-md-3" style="justify-content: center;">
+            <input type="text" class=" form-control" id="reqstock_input" onkeyup="myFunctionReq()"
+                placeholder="Search" /><span></span>
+        </div>
+
+    </div>
+</div>
+<div class="container d-flex justify-content-center">
+
+   
+
+    <div class="col-md-offset-2 custyle table-responsive">
+
+         
+        
+        <table id="reqstock_table" class="table table-list-search table-striped custab">
+            <thead>
+                <tr>
+                    <th scope="row" style="width:5%;">Item Id</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Quota</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Special request</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(length) %}
+                    <tr>
+                        <td>{{stocks[i].id}}</td>
+                        <td> {{stocks[i].item}} </td>
+                        <td> {{stocks[i].avail}} </td>
+                        <td> {{ quota[i] }} </td>
+                        <td><a href="{{ url_for('request.make_request', stock_id=stocks[i].id) }}"><button type="button" class="btn bgcolor")">Request</button></a></td>
+                        {% if quota[i] == 0 %}
+                            <td><a href="{{ url_for('make_special_request', stock_id=stocks[i].id) }}"><button type="button" class="btn bgcolor1")">Special Request</button></a></td>
+                        {% else %}
+                            <td><button class="btn btn-danger " disabled>Special Request</button><td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+        
+
+{% endblock content %}
